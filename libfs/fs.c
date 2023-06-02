@@ -210,7 +210,7 @@ int fs_create(const char *filename)
 	for (size_t i = 0; i < super.data_blocks; i++) {
 		if (fat.flat[i] == 0) {
 			fat.flat[i] = 0xFFFF;
-			new_entry->data_index = i;
+			new_entry->data_index = 0xFFFF;
 			break;
 		}
 	}
