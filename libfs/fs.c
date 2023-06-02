@@ -150,16 +150,25 @@ int fs_info(void)
 
 	// set free blocks to 0
 	int free_blocks = 0;
+
 	// if fat array at index i is 0, there is a free block
 	for (size_t i = 0; i < super.data_blocks; i++) {
 		if (fat.flat[i] == 0) {
 			free_blocks++;
 		}
 	}
-	
 	// print rest of FS Info
 	printf("fat_free_ratio=%d/%" PRIu16 "\n", free_blocks, super.data_blocks);
-	printf("rdir_free_ratio=%d/%d\n", FS_FILE_MAX_COUNT - files.open, FS_FILE_MAX_COUNT);
+
+	// do the same for last FS Info
+	free_blocks = 0;
+	for(size_t i = 0; i < FS_FILE_MAX_COUNT; i++){
+		if (root.entry[i].filename[0] == '\0') {
+			free_blocks++;
+		}
+	}
+	
+	printf("rdir_free_ratio=%d/%d\n", free_blocks, FS_FILE_MAX_COUNT);
 
 	return 0;
 }
