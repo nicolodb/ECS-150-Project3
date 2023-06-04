@@ -451,7 +451,7 @@ int fs_read(int fd, void *buf, size_t count)
 
 	// set entry to be the specified entry through the function argument
 	for (size_t i = 0; i < FS_FILE_MAX_COUNT; i++) {
-		if (memcmp(root.entry[i].filename, files.file[fd].filename, FS_FILENAME_LEN) == 0) {
+		if (memcmp(root.entry[i].filename, files.file[fd].filename/*, FS_FILENAME_LEN*/) == 0) {
 			entry = &root.entry[i];
 			break;
 		}
